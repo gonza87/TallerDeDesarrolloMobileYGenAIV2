@@ -597,17 +597,6 @@ async function mostrarEstadisticas(){
     let html = "<h2>Películas por categoría</h2>";
 
     // contar por categoria
-    /*categorias.forEach(cat => {
-
-      let cantidad = peliculas.filter(p =>
-        p.idCategoria == cat.id
-      ).length;
-
-      html += `
-        ${cat.nombre} ${cat.emoji}: ${cantidad}
-        <br>
-      `;
-    });*/
 
     for (let i=0; i<categorias.length; i++){
       let cantidad=0;

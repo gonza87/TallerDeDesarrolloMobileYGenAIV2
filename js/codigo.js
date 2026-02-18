@@ -167,6 +167,7 @@ function registro() {
     let idPais = document.querySelector("#slcPaises").value;
 
     if (usuario && password && idPais) {
+      limpiarCampos("txtRegNombreUsuario", "txtRegPassword", "slcPaises");
       fetch(`${urlBase}/usuarios`, {
         method: "POST",
         headers: {
@@ -211,11 +212,12 @@ function logout() {
 
 //Funciones de login
 async function login() {
-  console.log("login");
+  
   try {
     let usuario = document.querySelector("#txtNombreUsuario").value;
     let password = document.querySelector("#txtPassword").value;
     if (usuario && password) {
+      limpiarCampos ("txtNombreUsuario", "txtPassword")
       let response = await fetch(`${urlBase}/login`, {
         method: "POST",
         headers: {
@@ -245,7 +247,7 @@ async function agregarPelicula() {
   try {
     let token = localStorage.getItem("token");
     if (token) {
-      console.log("ok");
+      
       let idCategoria = document.querySelector("#slcCategorias").value;
       let nombre = document.querySelector("#txtRegNombrePelicula").value;
       const hoy = new Date().toISOString();
@@ -254,6 +256,7 @@ async function agregarPelicula() {
       let sentiment = await llamarSentiment(comentario);
 
       if (idCategoria && nombre && fecha <= hoy && comentario) {
+        limpiarCampos("slcCategorias","txtRegNombrePelicula", "dtFechaPelicula", "txtComentarioPelicula")
         if (sentiment) {
           if (idCategoria && nombre && fecha) {
             let response = await fetch(`${urlBase}/peliculas`, {
@@ -562,6 +565,18 @@ function mostrarMensaje(mensaje) {
   toast.position = "bottom";
   document.body.append(toast);
   toast.present();
+}
+
+function limpiarCampos(){
+    for(let i=0;i<arguments.length;i++){
+        console.log(arguments[i]);
+        //if(arguments[i]==="slcRoles"){
+          //  document.querySelector("#"+arguments[i]).value="-1";
+        //}
+        //else{
+        document.querySelector("#"+arguments[i]).value="";
+        //}
+    }
 }
 
 async function mostrarEstadisticas(){

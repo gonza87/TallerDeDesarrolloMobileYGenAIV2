@@ -597,7 +597,7 @@ async function mostrarEstadisticas(){
     let html = "<h2>Películas por categoría</h2>";
 
     // contar por categoria
-    categorias.forEach(cat => {
+    /*categorias.forEach(cat => {
 
       let cantidad = peliculas.filter(p =>
         p.idCategoria == cat.id
@@ -607,39 +607,56 @@ async function mostrarEstadisticas(){
         ${cat.nombre} ${cat.emoji}: ${cantidad}
         <br>
       `;
-    });
+    });*/
+
+    for (let i=0; i<categorias.length; i++){
+      let cantidad=0;
+      
+       for (let x=0 ; x<peliculas.length; x++){
+        if(categorias[i].id == peliculas[x].idCategoria){
+            cantidad ++;
+        }
+       }
+       html += `
+        ${categorias[i].nombre} ${categorias[i].emoji}: ${cantidad}
+        <br>
+      `;
+
+    }
+
     // porcentaje mayores de 12
     let mayores12 = 0;
     let menores12 = 0;
+    let contadas = 0
 
-    peliculas.forEach(p => {
 
-      let categoria = categorias.find(c =>
-        c.id == p.idCategoria
-      );
-      if(categoria){
-
-        if(categoria.edadMinima >= 12){
-          mayores12++;
-        }
-        else{
-          menores12++;
+    for (let i = 0; i< peliculas.length; i++){
+      
+      for(let x = 0; x<categorias.length; x++){
+        if(peliculas[i].idCategoria == categorias[x].id){
+          contadas ++;
+          if(categorias[x].edad_requerida > 12){
+            mayores12 ++;
+          }
+          else{
+            menores12 ++;
+          }
         }
       }
-    });
-    let total = peliculas.length;
+    }
 
     let porcentajeMayores =
-      ((mayores12 * 100) / total).toFixed(1);
+      ((mayores12 * 100) / contadas).toFixed(1);
 
     let porcentajeMenores =
-      ((menores12 * 100) / total).toFixed(1);
+      ((menores12 * 100) / contadas).toFixed(1);
 
     html += `
       <h2>Porcentajes</h2>
       Mayores de 12: ${porcentajeMayores}%<br>
       Menores de 12: ${porcentajeMenores}%
     `;
+   
     document.querySelector("#estadisticas").innerHTML = html;
   }
   catch(error){
@@ -735,3 +752,10 @@ L.marker([latitud, longitud]).addTo(map);
   mostrarMensaje("Coordenadas Incorrectas");
 }
 }*/
+
+
+
+
+
+/*
+ */

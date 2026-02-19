@@ -419,7 +419,7 @@ async function mostrarListado() {
           //listado += `${unaPeli.nombre} + ${categoriaBuscada.nombre}`
           listado += `
                       
-                      <ion-card>
+                      <ion-card color="light">
                         <ion-card-header>
                           <ion-card-title>${unaPeli.nombre}</ion-card-title>
                           <ion-card-subtitle>${categoriaBuscada.nombre} ${categoriaBuscada.emoji}</ion-card-subtitle>
@@ -497,7 +497,7 @@ async function aplicarFiltro() {
               //listado += `${unaPeli.nombre} + ${categoriaBuscada.nombre}`
               listado += `
                       
-                      <ion-card>
+                      <ion-card color="light">
                         <ion-card-header>
                           <ion-card-title>${unaPeli.nombre}</ion-card-title>
                           <ion-card-subtitle>${categoriaBuscada.nombre} ${categoriaBuscada.emoji}</ion-card-subtitle>
@@ -530,7 +530,7 @@ async function aplicarFiltro() {
               //listado += `${unaPeli.nombre} + ${categoriaBuscada.nombre}`
               listado += `
                       
-                      <ion-card>
+                      <ion-card color="light">
                         <ion-card-header>
                           <ion-card-title>${unaPeli.nombre}</ion-card-title>
                           <ion-card-subtitle>${categoriaBuscada.nombre} ${categoriaBuscada.emoji}</ion-card-subtitle>

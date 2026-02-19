@@ -91,6 +91,8 @@ function navegar(evt) {
       document.querySelector("#page-registro").style.display = "block";
       break;
     case "/agregarPelicula":
+      const hoy = new Date().toISOString();
+      document.getElementById("dtFechaPelicula").max = hoy;
       menuUsuLogueado();
       mostrarCategorias();
       document.querySelector("#page-agregarPelicula").style.display = "block";

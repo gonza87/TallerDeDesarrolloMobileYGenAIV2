@@ -8,11 +8,9 @@
   <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-     crossorigin=""/>
-     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-     crossorigin=""></script>
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <title>Document</title>
 </head>
 
@@ -61,12 +59,12 @@
             <ion-label>Listado</ion-label>
           </ion-item>
           <ion-item id="menuEstadisticas" href="/estadisticas" onclick="cerrarMenu()">
-          <ion-icon name="stats-chart-outline" slot="end"></ion-icon>
-          <ion-label>Estadisticas</ion-label>
+            <ion-icon name="stats-chart-outline" slot="end"></ion-icon>
+            <ion-label>Estadisticas</ion-label>
           </ion-item>
           <ion-item id="menuMapa" href="/mapa" onclick="cerrarMenu()">
-          <ion-icon name="map-outline" slot="end"></ion-icon> 
-          <ion-label>Mapa</ion-label>
+            <ion-icon name="map-outline" slot="end"></ion-icon>
+            <ion-label>Mapa</ion-label>
           </ion-item>
           <ion-item id="menuLogout" href="/logout" onclick="cerrarMenu()">
             <ion-icon name="log-out-outline" slot="end"></ion-icon>
@@ -85,9 +83,7 @@
           <ion-title>Bienvenido</ion-title>
         </ion-toolbar>
       </ion-header>
-      <ion-content id="bienvenido" class="ion-padding">
-
-      </ion-content>
+      <ion-content id="bienvenido" class="ion-padding"> </ion-content>
     </ion-page>
     <ion-page class="ion-page" id="page-login">
       <ion-header>
@@ -152,18 +148,18 @@
             </ion-select>
           </ion-item>
         </ion-list>
-        <br>
+        <br />
         <ion-input label="Nombre de Pelicula" id="txtRegNombrePelicula"></ion-input>
-        <br>
+        <br />
         <ion-input label="Comentario" id="txtComentarioPelicula"></ion-input>
-        <br>
+        <br />
         <ion-item>
           <ion-label position="stacked">Fecha</ion-label>
-          <ion-datetime id="dtFechaPelicula" presentation="date" size="cover">
+          <ion-datetime id="dtFechaPelicula" presentation="date" size="cover" max="">
           </ion-datetime>
         </ion-item>
         <ion-button id="btnAgregarPelicula" size="medium" expand="block">Agregar
-           <ion-icon slot="end" name="add-outline"></ion-icon>
+          <ion-icon slot="end" name="add-outline"></ion-icon>
         </ion-button>
       </ion-content>
     </ion-page>
@@ -179,51 +175,52 @@
       <ion-content class="ion-padding">
         <h1>Listado de peliculas</h1>
         <ion-item>
-            <ion-select aria-label="filtro" placeholder="Filtrar Por" id="slcFiltro" >
-              <ion-select-option value="semana">Ultima Semana</ion-select-option>
-              <ion-select-option value="mes">Ultimo Mes</ion-select-option>
-              <ion-select-option value="todas">Todas</ion-select-option>
-            </ion-select>
-          </ion-item>
-     <div id="listado" >
-     </div>
+          <ion-select aria-label="filtro" placeholder="Filtrar Por" id="slcFiltro">
+            <ion-select-option value="semana">Ultima Semana</ion-select-option>
+            <ion-select-option value="mes">Ultimo Mes</ion-select-option>
+            <ion-select-option value="todas">Todas</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <div id="listado"></div>
       </ion-content>
     </ion-page>
 
     <ion-page class="ion-page" id="page-estadisticas">
-  <ion-header>
-    <ion-toolbar>
-      <ion-buttons slot="start">
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
             <ion-menu-button></ion-menu-button>
           </ion-buttons>
-      <ion-title>Estadisticas</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content class="ion-padding">
-    <h1>Estadisticas</h1>
-    <div id="estadisticas"></div>
-  </ion-content>
-</ion-page>
+          <ion-title>Estadisticas</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <h1>Estadisticas</h1>
+        <div id="estadisticas"></div>
+      </ion-content>
+    </ion-page>
 
-<ion-page class="ion-page" id="page-mapa">
-  <ion-header>
-    <ion-toolbar>
-      <ion-buttons slot="start">
+    <ion-page class="ion-page" id="page-mapa">
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
             <ion-menu-button></ion-menu-button>
           </ion-buttons>
-      <ion-title>Mapa de Usuarios</ion-title>
-    </ion-toolbar>
-  </ion-header>
+          <ion-title>Mapa de Usuarios</ion-title>
+        </ion-toolbar>
+      </ion-header>
 
-  <ion-content class="ion-padding">
-    <h1>Mapa</h1>
-    <style>
-      #mapa { height: 400px; width: 100%;}
-    </style>
-    <div id="mapa"></div>
-  </ion-content>
-</ion-page>
-
+      <ion-content class="ion-padding">
+        <h1>Mapa</h1>
+        <style>
+          #mapa {
+            height: 400px;
+            width: 100%;
+          }
+        </style>
+        <div id="mapa"></div>
+      </ion-content>
+    </ion-page>
   </ion-app>
 
   <script src="./js/codigo.js"></script>

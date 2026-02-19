@@ -426,8 +426,8 @@ async function mostrarListado() {
                         </ion-card-header>
 
                         <ion-card-content>
-                          <ion-button onclick=eliminarPelicula(${unaPeli.id})>Eliminar</ion-button>
-                          Here's a small text description for the card content. Nothing more, nothing less.
+                          <ion-button color="danger" onclick=eliminarPelicula(${unaPeli.id})>Eliminar</ion-button>
+                          
                         </ion-card-content>
                       </ion-card>`;
         }
@@ -504,8 +504,8 @@ async function aplicarFiltro() {
                         </ion-card-header>
 
                         <ion-card-content>
-                          <ion-button onclick=eliminarPelicula(${unaPeli.id})>Eliminar</ion-button>
-                          Here's a small text description for the card content. Nothing more, nothing less.
+                          <ion-button color="danger" onclick=eliminarPelicula(${unaPeli.id})>Eliminar</ion-button>
+                          
                         </ion-card-content>
                       </ion-card>`;
             }
@@ -537,8 +537,8 @@ async function aplicarFiltro() {
                         </ion-card-header>
 
                         <ion-card-content>
-                          <ion-button onclick=eliminarPelicula(${unaPeli.id})>Eliminar</ion-button>
-                          Here's a small text description for the card content. Nothing more, nothing less.
+                          <ion-button color="danger" onclick=eliminarPelicula(${unaPeli.id})>Eliminar</ion-button>
+                          
                         </ion-card-content>
                       </ion-card>`;
             }

@@ -40,12 +40,12 @@ function agregarEventos() {
     .addEventListener("ionChange", aplicarFiltro);
 }
 
-function guardarUbicacion(position){
-  latitud=position.coords.latitude;
-  longitud=position.coords.longitude;
+function guardarUbicacion(position) {
+  latitud = position.coords.latitude;
+  longitud = position.coords.longitude;
 }
 
-function mostrarError(error){
+function mostrarError(error) {
   mostrarMensaje(error.message);
 }
 
@@ -111,7 +111,7 @@ function navegar(evt) {
     case "/mapa":
       menuUsuLogueado();
       setTimeout(() => {
-      mostrarMapa();
+        mostrarMapa();
       }, 50);
       document.querySelector("#page-mapa").style.display = "block";
       break;
@@ -212,12 +212,11 @@ function logout() {
 
 //Funciones de login
 async function login() {
-  
   try {
     let usuario = document.querySelector("#txtNombreUsuario").value;
     let password = document.querySelector("#txtPassword").value;
     if (usuario && password) {
-      limpiarCampos ("txtNombreUsuario", "txtPassword")
+      limpiarCampos("txtNombreUsuario", "txtPassword");
       let response = await fetch(`${urlBase}/login`, {
         method: "POST",
         headers: {
@@ -247,7 +246,6 @@ async function agregarPelicula() {
   try {
     let token = localStorage.getItem("token");
     if (token) {
-      
       let idCategoria = document.querySelector("#slcCategorias").value;
       let nombre = document.querySelector("#txtRegNombrePelicula").value;
       const hoy = new Date().toISOString();
@@ -256,7 +254,12 @@ async function agregarPelicula() {
       let sentiment = await llamarSentiment(comentario);
 
       if (idCategoria && nombre && fecha <= hoy && comentario) {
-        limpiarCampos("slcCategorias","txtRegNombrePelicula", "dtFechaPelicula", "txtComentarioPelicula")
+        limpiarCampos(
+          "slcCategorias",
+          "txtRegNombrePelicula",
+          "dtFechaPelicula",
+          "txtComentarioPelicula",
+        );
         if (sentiment) {
           if (idCategoria && nombre && fecha) {
             let response = await fetch(`${urlBase}/peliculas`, {
@@ -274,6 +277,7 @@ async function agregarPelicula() {
             let respuestaJson = await response.json();
             if (response.ok) {
               mostrarMensaje(respuestaJson.mensaje);
+              ruteo.push("/listado");
             } else if (response.status == 401) {
               mostrarMensaje("Debes iniciar sesiòn nuevamente");
             } else {
@@ -385,7 +389,6 @@ async function obtenerPeliculas() {
       if (response.ok) {
         let data = await response.json();
         peliculas = data.peliculas;
-        console.log(data.peliculas);
       } else if (response.status == 401) {
         mostrarMensaje("Debes iniciar sesiòn nuevamente");
       } else {
@@ -468,7 +471,6 @@ async function eliminarPelicula(idPelicula) {
   }
 }
 
-
 //Filtrado
 async function aplicarFiltro() {
   try {
@@ -513,8 +515,7 @@ async function aplicarFiltro() {
       } else {
         mostrarMensaje("No hay peliculas para mostrar");
       }
-    }
-     else if (filtro === "mes") {
+    } else if (filtro === "mes") {
       fecha.setMonth(ahora.getMonth() - 1);
       ahora = ahora.toISOString().split("T")[0];
       fecha = fecha.toISOString().split("T")[0];
@@ -543,14 +544,12 @@ async function aplicarFiltro() {
             }
             document.querySelector("#listado").innerHTML = listado;
           }
-        
         }
       } else {
         mostrarMensaje("No hay peliculas para mostrar");
       }
-    }
-    else{
-      mostrarListado()
+    } else {
+      mostrarListado();
     }
   } catch (error) {
     mostrarMensaje(error);
@@ -567,29 +566,19 @@ function mostrarMensaje(mensaje) {
   toast.present();
 }
 
-function limpiarCampos(){
-    for(let i=0;i<arguments.length;i++){
-        console.log(arguments[i]);
-        //if(arguments[i]==="slcRoles"){
-          //  document.querySelector("#"+arguments[i]).value="-1";
-        //}
-        //else{
-        document.querySelector("#"+arguments[i]).value="";
-        //}
-    }
+function limpiarCampos() {
+  for (let i = 0; i < arguments.length; i++) {
+    document.querySelector("#" + arguments[i]).value = "";
+  }
 }
 
-async function mostrarEstadisticas(){
-
-  try{
-
+async function mostrarEstadisticas() {
+  try {
     let peliculas = await obtenerPeliculas();
     let categorias = await obtenerCategorias();
 
-    if(!peliculas || peliculas.length === 0){
-
-      document.querySelector("#estadisticas").innerHTML =
-      "No hay datos";
+    if (!peliculas || peliculas.length === 0) {
+      document.querySelector("#estadisticas").innerHTML = "No hay datos";
 
       return;
     }
@@ -598,120 +587,106 @@ async function mostrarEstadisticas(){
 
     // contar por categoria
 
-    for (let i=0; i<categorias.length; i++){
-      let cantidad=0;
-      
-       for (let x=0 ; x<peliculas.length; x++){
-        if(categorias[i].id == peliculas[x].idCategoria){
-            cantidad ++;
+    for (let i = 0; i < categorias.length; i++) {
+      let cantidad = 0;
+
+      for (let x = 0; x < peliculas.length; x++) {
+        if (categorias[i].id == peliculas[x].idCategoria) {
+          cantidad++;
         }
-       }
-       html += `
+      }
+      html += `
         ${categorias[i].nombre} ${categorias[i].emoji}: ${cantidad}
         <br>
       `;
-
     }
 
     // porcentaje mayores de 12
     let mayores12 = 0;
     let menores12 = 0;
-    let contadas = 0
+    let contadas = 0;
 
-
-    for (let i = 0; i< peliculas.length; i++){
-      
-      for(let x = 0; x<categorias.length; x++){
-        if(peliculas[i].idCategoria == categorias[x].id){
-          contadas ++;
-          if(categorias[x].edad_requerida > 12){
-            mayores12 ++;
-          }
-          else{
-            menores12 ++;
+    for (let i = 0; i < peliculas.length; i++) {
+      for (let x = 0; x < categorias.length; x++) {
+        if (peliculas[i].idCategoria == categorias[x].id) {
+          contadas++;
+          if (categorias[x].edad_requerida > 12) {
+            mayores12++;
+          } else {
+            menores12++;
           }
         }
       }
     }
 
-    let porcentajeMayores =
-      ((mayores12 * 100) / contadas).toFixed(1);
+    let porcentajeMayores = ((mayores12 * 100) / contadas).toFixed(1);
 
-    let porcentajeMenores =
-      ((menores12 * 100) / contadas).toFixed(1);
+    let porcentajeMenores = ((menores12 * 100) / contadas).toFixed(1);
 
     html += `
       <h2>Porcentajes</h2>
       Mayores de 12: ${porcentajeMayores}%<br>
       Menores de 12: ${porcentajeMenores}%
     `;
-   
+
     document.querySelector("#estadisticas").innerHTML = html;
-  }
-  catch(error){
+  } catch (error) {
     mostrarMensaje(error);
   }
 }
 
-async function mostrarMapa(){
-
-  try{
-
+async function mostrarMapa() {
+  try {
     let token = localStorage.getItem("token");
 
     let responseUsuarios = await fetch(`${urlBase}/usuariosPorPais`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`
-      }
+        Authorization: `Bearer ${token}`,
+      },
     });
 
     let responsePaises = await fetch(`${urlBase}/paises`);
 
-    if(responseUsuarios.ok && responsePaises.ok){
-
+    if (responseUsuarios.ok && responsePaises.ok) {
       let dataUsuarios = await responseUsuarios.json();
       let dataPaises = await responsePaises.json();
 
       let usuariosPorPais = dataUsuarios.paises;
       let paises = dataPaises.paises;
 
-      if(map){
+      if (map) {
         map.remove();
       }
 
-      map = L.map('mapa').setView([20, 0], 2);
+      map = L.map("mapa").setView([20, 0], 2);
 
-      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19
+      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
       }).addTo(map);
 
       let contador = 0;
 
-      for(let i = 0; i < usuariosPorPais.length; i++){
-
+      for (let i = 0; i < usuariosPorPais.length; i++) {
         let up = usuariosPorPais[i];
 
-        let paisEncontrado = paises.find(p =>
-          p.id == up.id
-        );
+        let paisEncontrado = paises.find((p) => p.id == up.id);
 
-        if(paisEncontrado &&
-           paisEncontrado.latitud &&
-           paisEncontrado.longitud){
-
+        if (
+          paisEncontrado &&
+          paisEncontrado.latitud &&
+          paisEncontrado.longitud
+        ) {
           L.marker([
             parseFloat(paisEncontrado.latitud),
-            parseFloat(paisEncontrado.longitud)
-          ])
-          .addTo(map)
-          .bindPopup(`
+            parseFloat(paisEncontrado.longitud),
+          ]).addTo(map).bindPopup(`
             <b>${paisEncontrado.nombre}</b><br>
             Usuarios: ${up.cantidadDeUsuarios}
           `);
           contador++;
-          if(contador == 10){
+          if (contador == 10) {
             break;
           }
         }
@@ -720,8 +695,7 @@ async function mostrarMapa(){
         map.invalidateSize();
       }, 200);
     }
-  }
-  catch(error){
+  } catch (error) {
     console.log(error);
   }
 }
@@ -741,10 +715,6 @@ L.marker([latitud, longitud]).addTo(map);
   mostrarMensaje("Coordenadas Incorrectas");
 }
 }*/
-
-
-
-
 
 /*
  */

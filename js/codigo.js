@@ -255,7 +255,7 @@ async function agregarPelicula() {
       let comentario = document.querySelector("#txtComentarioPelicula").value;
       let sentiment = await llamarSentiment(comentario);
 
-      if (idCategoria && nombre && fecha <= hoy && comentario) {
+      if (idCategoria && nombre && fecha <= hoy && comentario.trim()) {
         limpiarCampos(
           "slcCategorias",
           "txtRegNombrePelicula",

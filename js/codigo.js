@@ -168,7 +168,7 @@ function registro() {
     let password = document.querySelector("#txtRegPassword").value;
     let idPais = document.querySelector("#slcPaises").value;
 
-    if (usuario && password && idPais) {
+    if (usuario.trim() && password.trim() && idPais) {
       limpiarCampos("txtRegNombreUsuario", "txtRegPassword", "slcPaises");
       fetch(`${urlBase}/usuarios`, {
         method: "POST",

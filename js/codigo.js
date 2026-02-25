@@ -127,7 +127,7 @@ function navegar(evt) {
       break;
   }
 }
-//asaddd
+
 function ocultarPaginas() {
   let paginas = document.querySelectorAll(".ion-page");
   for (let i = 1; i < paginas.length; i++) {
@@ -228,7 +228,7 @@ async function login() {
       });
       let respuestaJson = await response.json();
       if (response.ok) {
-        //token = respuestaJson.data.token;
+        
         localStorage.setItem("token", respuestaJson.token);
         localStorage.setItem("usuLogueado", usuario);
         ruteo.push("/");
@@ -418,7 +418,7 @@ async function mostrarListado() {
           (cat) => cat.id == unaPeli.idCategoria,
         );
         if (categoriaBuscada) {
-          //listado += `${unaPeli.nombre} + ${categoriaBuscada.nombre}`
+          
           listado += `
                       
                       <ion-card color="light">
@@ -496,7 +496,7 @@ async function aplicarFiltro() {
               (cat) => cat.id == unaPeli.idCategoria,
             );
             if (categoriaBuscada) {
-              //listado += `${unaPeli.nombre} + ${categoriaBuscada.nombre}`
+              
               listado += `
                       
                       <ion-card color="light">
@@ -529,7 +529,7 @@ async function aplicarFiltro() {
               (cat) => cat.id == unaPeli.idCategoria,
             );
             if (categoriaBuscada) {
-              //listado += `${unaPeli.nombre} + ${categoriaBuscada.nombre}`
+              
               listado += `
                       
                       <ion-card color="light">
@@ -574,6 +574,7 @@ function limpiarCampos() {
   }
 }
 
+//Funcion Estadisticas
 async function mostrarEstadisticas() {
   try {
     let peliculas = await obtenerPeliculas();
@@ -637,6 +638,7 @@ async function mostrarEstadisticas() {
   }
 }
 
+//Funcion Mapa
 async function mostrarMapa() {
   try {
     let token = localStorage.getItem("token");
@@ -698,6 +700,7 @@ async function mostrarMapa() {
       }, 200);
     }
   } catch (error) {
-    console.log(error);
+    mostrarMensaje(error)
+    
   }
 }

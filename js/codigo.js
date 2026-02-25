@@ -701,22 +701,3 @@ async function mostrarMapa() {
     console.log(error);
   }
 }
-
-/*function mostrarMapa(){
-  if(latitud && longitud){
-    if(map){
-      map.remove();
-    }
-  map = L.map('mapa').setView([latitud, longitud], 13);
-  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-}).addTo(map);
-L.marker([latitud, longitud]).addTo(map);
-}else {
-  mostrarMensaje("Coordenadas Incorrectas");
-}
-}*/
-
-/*
- */

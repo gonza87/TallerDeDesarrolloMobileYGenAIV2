@@ -1,229 +1,281 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+    <title>Document</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
-  <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-  <title>Document</title>
-</head>
+  <body>
+    <ion-app>
+      <ion-router id="ruteo">
+        <ion-route url="/" component="page-home"></ion-route>
+        <ion-route url="/login" component="page-login"></ion-route>
+        <ion-route url="/registro" component="page-registro"></ion-route>
+        <ion-route
+          url="/agregarPelicula"
+          component="page-agregarPelicula"
+        ></ion-route>
+        <ion-route url="/listado" component="page-listado"></ion-route>
+        <ion-route
+          url="/estadisticas"
+          component="page-estadisticas"
+        ></ion-route>
+        <ion-route url="/mapa" component="page-mapa"></ion-route>
+        <ion-route url="/logout" component="page-logout"></ion-route>
+      </ion-router>
+      <ion-nav></ion-nav>
+      <ion-menu content-id="main-content" id="menu">
+        <ion-header>
+          <ion-toolbar>
+            <ion-buttons slot="start">
+              <ion-menu-button></ion-menu-button>
+            </ion-buttons>
+            <ion-title>Menu Content</ion-title>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+          <ion-list>
+            <ion-item id="menuInicio" href="/" onclick="cerrarMenu()">
+              <ion-icon name="home-outline" slot="end"></ion-icon>
+              <ion-label>Inicio</ion-label>
+            </ion-item>
+            <ion-item id="menuLogin" href="/login" onclick="cerrarMenu()">
+              <ion-icon name="log-in-outline" slot="end"></ion-icon>
+              <ion-label>Login</ion-label>
+            </ion-item>
+            <ion-item id="menuRegistro" href="/registro" onclick="cerrarMenu()">
+              <ion-icon name="person-add-outline" slot="end"></ion-icon>
+              <ion-label>Registro</ion-label>
+            </ion-item>
+            <ion-item
+              id="menuAgregarPelicula"
+              href="/agregarPelicula"
+              onclick="cerrarMenu()"
+            >
+              <ion-icon name="add-circle-outline" slot="end"></ion-icon>
+              <ion-label>Agregar Pelicula</ion-label>
+            </ion-item>
+            <ion-item id="menuListado" href="/listado" onclick="cerrarMenu()">
+              <ion-icon name="list-outline" slot="end"></ion-icon>
+              <ion-label>Listado</ion-label>
+            </ion-item>
+            <ion-item
+              id="menuEstadisticas"
+              href="/estadisticas"
+              onclick="cerrarMenu()"
+            >
+              <ion-icon name="stats-chart-outline" slot="end"></ion-icon>
+              <ion-label>Estadisticas</ion-label>
+            </ion-item>
+            <ion-item id="menuMapa" href="/mapa" onclick="cerrarMenu()">
+              <ion-icon name="map-outline" slot="end"></ion-icon>
+              <ion-label>Mapa</ion-label>
+            </ion-item>
+            <ion-item id="menuLogout" href="/logout" onclick="cerrarMenu()">
+              <ion-icon name="log-out-outline" slot="end"></ion-icon>
+              <ion-label>Logout</ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-content>
+      </ion-menu>
+      <div class="ion-page" id="main-content"></div>
+      <ion-page class="ion-page" id="page-home">
+        <ion-header>
+          <ion-toolbar>
+            <ion-buttons slot="start">
+              <ion-menu-button></ion-menu-button>
+            </ion-buttons>
+            <ion-title>Bienvenido</ion-title>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content id="bienvenido" class="ion-padding"> </ion-content>
+      </ion-page>
+      <ion-page class="ion-page" id="page-login">
+        <ion-header>
+          <ion-toolbar>
+            <ion-buttons slot="start">
+              <ion-menu-button></ion-menu-button>
+            </ion-buttons>
+            <ion-title>Login</ion-title>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+          <h1>Login</h1>
+          <ion-input
+            label="Nombre de usuario"
+            id="txtNombreUsuario"
+          ></ion-input>
+          <ion-input label="Password" id="txtPassword" type="password">
+            <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+          </ion-input>
 
-<body>
-  <ion-app>
-    <ion-router id="ruteo">
-      <ion-route url="/" component="page-home"></ion-route>
-      <ion-route url="/login" component="page-login"></ion-route>
-      <ion-route url="/registro" component="page-registro"></ion-route>
-      <ion-route url="/agregarPelicula" component="page-agregarPelicula"></ion-route>
-      <ion-route url="/listado" component="page-listado"></ion-route>
-      <ion-route url="/estadisticas" component="page-estadisticas"></ion-route>
-      <ion-route url="/mapa" component="page-mapa"></ion-route>
-      <ion-route url="/logout" component="page-logout"></ion-route>
-    </ion-router>
-    <ion-nav></ion-nav>
-    <ion-menu content-id="main-content" id="menu">
-      <ion-header>
-        <ion-toolbar>
-          <ion-buttons slot="start">
-            <ion-menu-button></ion-menu-button>
-          </ion-buttons>
-          <ion-title>Menu Content</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content class="ion-padding">
-        <ion-list>
-          <ion-item id="menuInicio" href="/" onclick="cerrarMenu()">
-            <ion-icon name="home-outline" slot="end"></ion-icon>
-            <ion-label>Inicio</ion-label>
-          </ion-item>
-          <ion-item id="menuLogin" href="/login" onclick="cerrarMenu()">
-            <ion-icon name="log-in-outline" slot="end"></ion-icon>
-            <ion-label>Login</ion-label>
-          </ion-item>
-          <ion-item id="menuRegistro" href="/registro" onclick="cerrarMenu()">
-            <ion-icon name="person-add-outline" slot="end"></ion-icon>
-            <ion-label>Registro</ion-label>
-          </ion-item>
-          <ion-item id="menuAgregarPelicula" href="/agregarPelicula" onclick="cerrarMenu()">
-            <ion-icon name="add-circle-outline" slot="end"></ion-icon>
-            <ion-label>Agregar Pelicula</ion-label>
-          </ion-item>
-          <ion-item id="menuListado" href="/listado" onclick="cerrarMenu()">
-            <ion-icon name="list-outline" slot="end"></ion-icon>
-            <ion-label>Listado</ion-label>
-          </ion-item>
-          <ion-item id="menuEstadisticas" href="/estadisticas" onclick="cerrarMenu()">
-            <ion-icon name="stats-chart-outline" slot="end"></ion-icon>
-            <ion-label>Estadisticas</ion-label>
-          </ion-item>
-          <ion-item id="menuMapa" href="/mapa" onclick="cerrarMenu()">
-            <ion-icon name="map-outline" slot="end"></ion-icon>
-            <ion-label>Mapa</ion-label>
-          </ion-item>
-          <ion-item id="menuLogout" href="/logout" onclick="cerrarMenu()">
-            <ion-icon name="log-out-outline" slot="end"></ion-icon>
-            <ion-label>Logout</ion-label>
-          </ion-item>
-        </ion-list>
-      </ion-content>
-    </ion-menu>
-    <div class="ion-page" id="main-content"></div>
-    <ion-page class="ion-page" id="page-home">
-      <ion-header>
-        <ion-toolbar>
-          <ion-buttons slot="start">
-            <ion-menu-button></ion-menu-button>
-          </ion-buttons>
-          <ion-title>Bienvenido</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content id="bienvenido" class="ion-padding"> </ion-content>
-    </ion-page>
-    <ion-page class="ion-page" id="page-login">
-      <ion-header>
-        <ion-toolbar>
-          <ion-buttons slot="start">
-            <ion-menu-button></ion-menu-button>
-          </ion-buttons>
-          <ion-title>Login</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content class="ion-padding">
-        <h1>Login</h1>
-        <ion-input label="Nombre de usuario" id="txtNombreUsuario"></ion-input>
-        <ion-input label="Password" id="txtPassword" type="password">
-          <ion-input-password-toggle slot="end"></ion-input-password-toggle>
-        </ion-input>
+          <ion-button id="btnLogin">Login</ion-button>
+        </ion-content>
+      </ion-page>
+      <ion-page class="ion-page" id="page-registro">
+        <ion-header>
+          <ion-toolbar>
+            <ion-buttons slot="start">
+              <ion-menu-button></ion-menu-button>
+            </ion-buttons>
+            <ion-title>Registro</ion-title>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+          <h1>Registro</h1>
+          <ion-input
+            label="Nombre de usuario"
+            id="txtRegNombreUsuario"
+          ></ion-input>
+          <ion-input label="Password" id="txtRegPassword" type="password">
+            <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+          </ion-input>
 
-        <ion-button id="btnLogin">Login</ion-button>
-      </ion-content>
-    </ion-page>
-    <ion-page class="ion-page" id="page-registro">
-      <ion-header>
-        <ion-toolbar>
-          <ion-buttons slot="start">
-            <ion-menu-button></ion-menu-button>
-          </ion-buttons>
-          <ion-title>Registro</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content class="ion-padding">
-        <h1>Registro</h1>
-        <ion-input label="Nombre de usuario" id="txtRegNombreUsuario"></ion-input>
-        <ion-input label="Password" id="txtRegPassword" type="password">
-          <ion-input-password-toggle slot="end"></ion-input-password-toggle>
-        </ion-input>
+          <ion-list>
+            <ion-item>
+              <ion-select
+                aria-label="pais"
+                placeholder="Selecciona Pais"
+                id="slcPaises"
+              >
+              </ion-select>
+            </ion-item>
+          </ion-list>
 
-        <ion-list>
+          <ion-button id="btnRegistro">Registro</ion-button>
+        </ion-content>
+      </ion-page>
+
+      <ion-page class="ion-page" id="page-agregarPelicula">
+        <ion-header>
+          <ion-toolbar>
+            <ion-buttons slot="start">
+              <ion-menu-button></ion-menu-button>
+            </ion-buttons>
+            <ion-title>Agregar Pelicula</ion-title>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+          <h1>Agregar Pelicula</h1>
+          <ion-list>
+            <ion-item>
+              <ion-select
+                aria-label="categoria"
+                placeholder="Selecciona Categoria"
+                id="slcCategorias"
+              >
+              </ion-select>
+            </ion-item>
+          </ion-list>
+          <br />
+          <ion-input
+            label="Nombre de Pelicula"
+            id="txtRegNombrePelicula"
+          ></ion-input>
+          <br />
+          <ion-input label="Comentario" id="txtComentarioPelicula"></ion-input>
+          <br />
           <ion-item>
-            <ion-select aria-label="pais" placeholder="Selecciona Pais" id="slcPaises">
+            <ion-label position="stacked">Fecha</ion-label>
+            <ion-datetime id="dtFechaPelicula" presentation="date" size="cover">
+            </ion-datetime>
+          </ion-item>
+          <ion-button id="btnAgregarPelicula" size="medium" expand="block"
+            >Agregar
+            <ion-icon slot="end" name="add-outline"></ion-icon>
+          </ion-button>
+        </ion-content>
+      </ion-page>
+      <ion-page class="ion-page" id="page-listado">
+        <ion-header>
+          <ion-toolbar>
+            <ion-buttons slot="start">
+              <ion-menu-button></ion-menu-button>
+            </ion-buttons>
+            <ion-title>Listado</ion-title>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+          <h1>Listado de peliculas</h1>
+          <ion-item>
+            <ion-select
+              aria-label="filtro"
+              placeholder="Filtrar Por"
+              id="slcFiltro"
+            >
+              <ion-select-option value="semana"
+                >Ultima Semana</ion-select-option
+              >
+              <ion-select-option value="mes">Ultimo Mes</ion-select-option>
+              <ion-select-option value="todas">Todas</ion-select-option>
             </ion-select>
           </ion-item>
-        </ion-list>
+          <div id="listado"></div>
+        </ion-content>
+      </ion-page>
 
-        <ion-button id="btnRegistro">Registro</ion-button>
-      </ion-content>
-    </ion-page>
+      <ion-page class="ion-page" id="page-estadisticas">
+        <ion-header>
+          <ion-toolbar>
+            <ion-buttons slot="start">
+              <ion-menu-button></ion-menu-button>
+            </ion-buttons>
+            <ion-title>Estadisticas</ion-title>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+          <h1>Estadisticas</h1>
+          <div id="estadisticas"></div>
+        </ion-content>
+      </ion-page>
 
-    <ion-page class="ion-page" id="page-agregarPelicula">
-      <ion-header>
-        <ion-toolbar>
-          <ion-buttons slot="start">
-            <ion-menu-button></ion-menu-button>
-          </ion-buttons>
-          <ion-title>Agregar Pelicula</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content class="ion-padding">
-        <h1>Agregar Pelicula</h1>
-        <ion-list>
-          <ion-item>
-            <ion-select aria-label="categoria" placeholder="Selecciona Categoria" id="slcCategorias">
-            </ion-select>
-          </ion-item>
-        </ion-list>
-        <br />
-        <ion-input label="Nombre de Pelicula" id="txtRegNombrePelicula"></ion-input>
-        <br />
-        <ion-input label="Comentario" id="txtComentarioPelicula"></ion-input>
-        <br />
-        <ion-item>
-          <ion-label position="stacked">Fecha</ion-label>
-          <ion-datetime id="dtFechaPelicula" presentation="date" size="cover" max="">
-          </ion-datetime>
-        </ion-item>
-        <ion-button id="btnAgregarPelicula" size="medium" expand="block">Agregar
-          <ion-icon slot="end" name="add-outline"></ion-icon>
-        </ion-button>
-      </ion-content>
-    </ion-page>
-    <ion-page class="ion-page" id="page-listado">
-      <ion-header>
-        <ion-toolbar>
-          <ion-buttons slot="start">
-            <ion-menu-button></ion-menu-button>
-          </ion-buttons>
-          <ion-title>Listado</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content class="ion-padding">
-        <h1>Listado de peliculas</h1>
-        <ion-item>
-          <ion-select aria-label="filtro" placeholder="Filtrar Por" id="slcFiltro">
-            <ion-select-option value="semana">Ultima Semana</ion-select-option>
-            <ion-select-option value="mes">Ultimo Mes</ion-select-option>
-            <ion-select-option value="todas">Todas</ion-select-option>
-          </ion-select>
-        </ion-item>
-        <div id="listado"></div>
-      </ion-content>
-    </ion-page>
+      <ion-page class="ion-page" id="page-mapa">
+        <ion-header>
+          <ion-toolbar>
+            <ion-buttons slot="start">
+              <ion-menu-button></ion-menu-button>
+            </ion-buttons>
+            <ion-title>Mapa de Usuarios</ion-title>
+          </ion-toolbar>
+        </ion-header>
 
-    <ion-page class="ion-page" id="page-estadisticas">
-      <ion-header>
-        <ion-toolbar>
-          <ion-buttons slot="start">
-            <ion-menu-button></ion-menu-button>
-          </ion-buttons>
-          <ion-title>Estadisticas</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content class="ion-padding">
-        <h1>Estadisticas</h1>
-        <div id="estadisticas"></div>
-      </ion-content>
-    </ion-page>
+        <ion-content class="ion-padding">
+          <h1>Mapa</h1>
+          <style>
+            #mapa {
+              height: 400px;
+              width: 100%;
+            }
+          </style>
+          <div id="mapa"></div>
+        </ion-content>
+      </ion-page>
+    </ion-app>
 
-    <ion-page class="ion-page" id="page-mapa">
-      <ion-header>
-        <ion-toolbar>
-          <ion-buttons slot="start">
-            <ion-menu-button></ion-menu-button>
-          </ion-buttons>
-          <ion-title>Mapa de Usuarios</ion-title>
-        </ion-toolbar>
-      </ion-header>
-
-      <ion-content class="ion-padding">
-        <h1>Mapa</h1>
-        <style>
-          #mapa {
-            height: 400px;
-            width: 100%;
-          }
-        </style>
-        <div id="mapa"></div>
-      </ion-content>
-    </ion-page>
-  </ion-app>
-
-  <script src="./js/codigo.js"></script>
-</body>
-
+    <script src="./js/codigo.js"></script>
+  </body>
 </html>

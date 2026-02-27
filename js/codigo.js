@@ -92,7 +92,7 @@ function navegar(evt) {
       break;
     case "/agregarPelicula":
       const hoy = new Date().toISOString();
-      document.getElementById("dtFechaPelicula").max = hoy;
+
       menuUsuLogueado();
       mostrarCategorias();
       document.querySelector("#page-agregarPelicula").style.display = "block";
@@ -228,7 +228,6 @@ async function login() {
       });
       let respuestaJson = await response.json();
       if (response.ok) {
-        
         localStorage.setItem("token", respuestaJson.token);
         localStorage.setItem("usuLogueado", usuario);
         ruteo.push("/");
@@ -418,7 +417,6 @@ async function mostrarListado() {
           (cat) => cat.id == unaPeli.idCategoria,
         );
         if (categoriaBuscada) {
-          
           listado += `
                       
                       <ion-card color="light">
@@ -496,7 +494,6 @@ async function aplicarFiltro() {
               (cat) => cat.id == unaPeli.idCategoria,
             );
             if (categoriaBuscada) {
-              
               listado += `
                       
                       <ion-card color="light">
@@ -529,7 +526,6 @@ async function aplicarFiltro() {
               (cat) => cat.id == unaPeli.idCategoria,
             );
             if (categoriaBuscada) {
-              
               listado += `
                       
                       <ion-card color="light">
@@ -700,7 +696,6 @@ async function mostrarMapa() {
       }, 200);
     }
   } catch (error) {
-    mostrarMensaje(error)
-    
+    mostrarMensaje(error);
   }
 }
